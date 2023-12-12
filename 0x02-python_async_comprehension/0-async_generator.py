@@ -11,10 +11,10 @@ async def async_generator() -> Generator[float, None, None]:
     """ Async Generator
 
     Args:
-    max_delay (int): max delay time
+    None
 
     Returns:
-        float: A random float
+        Generator: A list containing float | None
     """
     for _ in range(10):
         await sleep(1)
