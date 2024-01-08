@@ -16,7 +16,6 @@ class TestGithubOrgClient(unittest.TestCase):
         ('google'),
         ('abc')
     ])
-
     @patch('client.get_json')
     def test_org(self, input, mock):
         """Method to test that GithubOrgClient.org returns correct value"""
@@ -78,8 +77,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """A class method called before tests"""
         config_dict = {'return_value.json.side_effect':
                   [
-                      cls.org_payload, cls.repos_payload,
-                      cls.org_payload, cls.repos_payload
+                    cls.org_payload, cls.repos_payload,
+                    cls.org_payload, cls.repos_payload
                   ]
                   }
         cls.get_patcher = patch('requests.get', **config_dict)
@@ -87,8 +86,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
 
     def test_public_repos(self):
-        """ Test that the list of repos is what you expect from the chosen payload.
-        Test that the mocked property and the mocked get_json was called once"""
+        """ Test list of repos is what you expect from the chosen payload.
+        Test the mocked property and mocked get_json was called once"""
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.org, self.org_payload)
@@ -98,7 +97,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.mock.assert_called()
 
     def test_public_repos_with_license(self):
-        """ Method test the public_repos with the argument license="apache-2.0" and make sure the result matches the expected value from the fixtures. """
+        """ Method test the public_repos with the arg license=apache-2.0 """
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.public_repos(), self.expected_repos)
