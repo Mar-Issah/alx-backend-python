@@ -87,7 +87,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
 
     def test_public_repos(self):
-        """ Integration test: public repos"""
+        """ Test that the list of repos is what you expect from the chosen payload.
+        Test that the mocked property and the mocked get_json was called once"""
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.org, self.org_payload)
@@ -97,7 +98,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.mock.assert_called()
 
     def test_public_repos_with_license(self):
-        """ Integration test for public repos with License """
+        """ Method test the public_repos with the argument license="apache-2.0" and make sure the result matches the expected value from the fixtures. """
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.public_repos(), self.expected_repos)
