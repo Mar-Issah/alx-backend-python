@@ -75,12 +75,13 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """A class method called before tests"""
-        config_dict = {'return_value.json.side_effect':
-                  [
-                    cls.org_payload, cls.repos_payload,
-                    cls.org_payload, cls.repos_payload
-                  ]
-                  }
+        config_dict = {
+            'return_value.json.side_effect':
+            [
+                cls.org_payload, cls.repos_payload,
+                cls.org_payload, cls.repos_payload
+            ]
+        }
         cls.get_patcher = patch('requests.get', **config_dict)
 
         cls.mock = cls.get_patcher.start()
